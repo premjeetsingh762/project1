@@ -1,35 +1,14 @@
-import { combineReducers } from "redux";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-const songsReducer = () => {
-  return [
-    {
-      title: "No Scrubs",
-      duration: "4:05"
-    },
-    {
-      title: "Lily",
-      duration: "3:46"
-    },
-    {
-      title: "Faded",
-      duration: "3:33"
-    },
-    {
-      title: "I Want it That Way",
-      duration: "1:56"
-    }
-  ];
-};
+import App from "./Components/App";
+import reducers from "./reducers/reducers.js";
 
-const selectedSongReducer = (selectedSong = null, action) => {
-  if (action.type === "SONG_SELECTED") {
-    return action.payload;
-  }
-
-  return selectedSong;
-};
-
-export default combineReducers({
-  songs: songsReducer,
-  selectedSong: selectedSongReducer
-})
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);
